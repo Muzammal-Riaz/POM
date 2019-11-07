@@ -1,0 +1,7 @@
+name: FREE CRM Application Test Automation Test Suite
+configFailurePolicy: skip
+tests:
+  - name: Free CRM App Test Cases
+  classes:
+    - com.crm.qa.testcases.LoginPageTest
+

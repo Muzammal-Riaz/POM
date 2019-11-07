@@ -1,0 +1,69 @@
+package com.crm.qa.testcases;
+
+import java.io.IOException;
+
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import com.crm.qa.base.TestBase;
+import com.crm.qa.pages.ContactsPage;
+import com.crm.qa.pages.DealsPage;
+import com.crm.qa.pages.HomePage;
+import com.crm.qa.pages.LoginPage;
+import com.crm.qa.pages.TasksPage;
+
+public class ContactsPageTest extends TestBase{
+	
+	ContactsPage ContactsPage,NewContact;
+	DealsPage DealsPage;
+	TasksPage TasksPage;
+	HomePage HomePage;
+	LoginPage LoginPage;
+	
+
+	public ContactsPageTest() throws IOException {
+		super();
+		
+	}
+	
+	@BeforeMethod
+	
+	public void SetUpHomePage() throws IOException
+	{
+		initialization();
+		LoginPage = new LoginPage();
+//		HomePage = LoginPage.login(Prop.getProperty("email"), Prop.getProperty("password"));
+//		driver.manage().timeouts().implicitlyWait(TestUtil.IMPLICIT_WAIT, TimeUnit.SECONDS);
+//		HomePage = new HomePage();
+		
+	}
+	
+	@Test
+	
+	public void validateCreateNewContact() throws IOException, InterruptedException
+	
+	{
+		HomePage = LoginPage.login(Prop.getProperty("email"), Prop.getProperty("password"));
+		Thread.sleep(1000);
+		ContactsPage = HomePage.clickonContacts();
+		Thread.sleep(1000);
+
+		NewContact = HomePage.clickonnewContacts();
+		Thread.sleep(10000);
+
+		ContactsPage.CreateNewContact("Virat","Kohli","King","BestBatsman","VK@gmail.com");
+		Thread.sleep(10000);
+		
+	}
+	
+	
+	@AfterMethod
+	
+	public void teardownHomepage()
+	{
+		
+		driver.quit();	
+	}
+
+}

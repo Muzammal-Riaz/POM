@@ -1,0 +1,48 @@
+package com.crm.qa.base;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class TestBase {
+	
+	
+	static WebDriver driver;
+	static Properties Prop;
+	
+	public TestBase() throws IOException      //constructor
+	{
+		try 
+		{
+			
+		Prop = new Properties();
+		FileInputStream io = new FileInputStream ("C:\\Users\\muzammil.riaz\\eclipse-workspace\\FreeCRMTest\\src\\main\\java\\com\\crm\\qa\\config\\config.properties" );
+		Prop.load(io);	
+		}
+		catch (FileNotFoundException e)
+		{
+			
+			e.printStackTrace();
+		}
+		catch (IOException e2)
+		{
+			
+			e2.printStackTrace();
+		}
+	}
+	
+	public static void initialization () 
+	{
+		String browsername = Prop.getProperty("browser");
+		if (browsername.contentEquals("chrome"))
+		{
+			System.setProperty("webdriver.chrome.driver", "C:\\Users\\muzammil.riaz\\Desktop\\exe files\\chrome new version\\chromedriver.exe");
+			driver= new ChromeDriver();
+		}
+	}
+
+}
